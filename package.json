@@ -1,0 +1,27 @@
+{
+  "name": "bitflow",
+  "version": "0.0.1",
+  "description": "Misuc visualizer.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frenchbread/bf.git"
+  },
+  "keywords": [
+    "music",
+    "audio",
+    "visualize"
+  ],
+  "author": "Damir Mustafin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frenchbread/bf/issues"
+  },
+  "homepage": "https://github.com/frenchbread/bf#readme",
+  "dependencies": {
+    "web-audio-analyser": "^2.0.0"
+  }
+}
