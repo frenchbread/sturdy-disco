@@ -33,6 +33,7 @@ class VisualizerView extends View {
     public void updateVisualizer(byte[] bytes) {
         mBytes = bytes;
         invalidate();
+        cycleColor();
     }
 
     @Override
@@ -59,6 +60,16 @@ class VisualizerView extends View {
         }
 
         canvas.drawLines(mPoints, mForePaint);
+    }
+
+    private float colorCounter = 0;
+    private void cycleColor()
+    {
+        int r = (int)Math.floor(128*(Math.sin(colorCounter) + 3));
+        int g = (int)Math.floor(128*(Math.sin(colorCounter + 1) + 1));
+        int b = (int)Math.floor(128*(Math.sin(colorCounter + 7) + 1));
+        mForePaint.setColor(Color.argb(128, r, g, b));
+        colorCounter += 0.03;
     }
 
 }
