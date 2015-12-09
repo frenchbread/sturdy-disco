@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
 
     private Handler myHandler = new Handler();
 
-    private Button play, pause, backward, forward;
+    private Button play, pause, stop, backward, forward;
     private TextView currentTrackTime, totalTrackTime, trackTitle;
     private SeekBar trackProgress;
 
@@ -65,6 +65,7 @@ public class MainActivity extends Activity {
         // Buttons
         play = (Button) findViewById(R.id.play);
         pause = (Button) findViewById(R.id.pause);
+        stop = (Button) findViewById(R.id.stop);
 //        forward = (ImageButton) findViewById(R.id.forward);
 //        backward=(ImageButton)findViewById(R.id.backward);
 
@@ -102,6 +103,8 @@ public class MainActivity extends Activity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
+
+
 
                 mPlayer.start();
                 isPaused = false;
@@ -149,8 +152,9 @@ public class MainActivity extends Activity {
 
                 trackProgress.setProgress((int) startTime);
                 myHandler.postDelayed(UpdateSongTime, 100);
-                pause.setEnabled(true);
+
                 play.setEnabled(false);
+                pause.setEnabled(true);
             }
         });
 
@@ -161,9 +165,25 @@ public class MainActivity extends Activity {
                 Toast.makeText(getApplicationContext(), "Pausing sound", Toast.LENGTH_SHORT).show();
 
                 mPlayer.pause();
-                pause.setEnabled(false);
+
                 play.setEnabled(true);
+                pause.setEnabled(false);
             }
+        });
+
+        stop.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+
+                mPlayer.pause();
+
+                mPlayer.seekTo(0);
+
+                play.setEnabled(true);
+                pause.setEnabled(false);
+            }
+
         });
 
 
