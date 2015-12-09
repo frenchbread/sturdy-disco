@@ -16,7 +16,7 @@
         android:id="@+id/trackProgress"
         android:indeterminate="false"
         android:layout_alignParentEnd="true"
-        android:layout_above="@+id/play"
+        android:layout_above="@+id/pause"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -61,8 +61,8 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="70dp"
         android:layout_height="50dp"
-        android:text="►"
-        android:id="@+id/play"
+        android:text="||"
+        android:id="@+id/pause"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
@@ -70,10 +70,10 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="70dp"
         android:layout_height="50dp"
-        android:text="||"
-        android:id="@+id/pause"
+        android:text="►"
+        android:id="@+id/play"
         android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/play" />
+        android:layout_toEndOf="@+id/pause" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -82,7 +82,7 @@
         android:text="•"
         android:id="@+id/stop"
         android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/play" />
+        android:layout_toStartOf="@+id/pause" />
 
     <Space
         android:layout_width="fill_parent"
