@@ -10,46 +10,14 @@
     tools:context="com.example.damir.bitflow_android.MainActivity"
     android:id="@+id/mainLayout">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=">>"
-        android:id="@+id/forward"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="||"
-        android:id="@+id/pause"
-        android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/backward" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=">"
-        android:id="@+id/play"
-        android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/forward" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="&lt;&lt;"
-        android:id="@+id/backward"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
-
     <SeekBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/trackProgress"
         android:indeterminate="false"
-        android:layout_above="@+id/forward"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/play"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -57,7 +25,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="00:00"
         android:id="@+id/currentTrackTime"
-        android:layout_alignBottom="@+id/trackTitle"
+        android:layout_above="@+id/trackProgress"
         android:layout_toStartOf="@+id/textView"
         android:layout_marginEnd="16dp" />
 
@@ -79,13 +47,6 @@
         android:layout_above="@+id/trackProgress"
         android:layout_alignParentStart="true" />
 
-    <Space
-        android:layout_width="20px"
-        android:layout_height="20px"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/space" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -96,9 +57,36 @@
         android:layout_toStartOf="@+id/totalTrackTime"
         android:layout_marginEnd="16dp" />
 
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:text="►"
+        android:id="@+id/play"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:text="||"
+        android:id="@+id/pause"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/play" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
+        android:text="•"
+        android:id="@+id/stop"
+        android:layout_alignParentBottom="true"
+        android:layout_toStartOf="@+id/play" />
+
     <Space
         android:layout_width="fill_parent"
-        android:layout_height="190dp"
+        android:layout_height="180dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 

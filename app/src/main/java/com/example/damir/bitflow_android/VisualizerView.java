@@ -25,7 +25,7 @@ class VisualizerView extends View {
     private void init() {
         mBytes = null;
 
-        mForePaint.setStrokeWidth(1f);
+        mForePaint.setStrokeWidth(3f);
         mForePaint.setAntiAlias(true);
         mForePaint.setColor(Color.rgb(255, 255, 255));
     }
@@ -42,7 +42,7 @@ class VisualizerView extends View {
         if (mBytes == null) {
             return;
         }
-
+        
         if (mPoints == null || mPoints.length < mBytes.length * 4) {
             mPoints = new float[mBytes.length * 4];
         }
@@ -60,4 +60,5 @@ class VisualizerView extends View {
 
         canvas.drawLines(mPoints, mForePaint);
     }
+
 }
