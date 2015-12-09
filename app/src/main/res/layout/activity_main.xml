@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.damir.bitflow_android.MainActivity">
+    tools:context="com.example.damir.bitflow_android.MainActivity"
+    android:id="@+id/mainLayout">
 
     <Button
         android:layout_width="wrap_content"
@@ -45,10 +46,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/trackProgress"
-        android:layout_alignParentTop="true"
+        android:indeterminate="false"
+        android:layout_above="@+id/forward"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:indeterminate="false" />
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -75,6 +76,12 @@
         android:text="Track title"
         android:id="@+id/trackTitle"
         android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
 </RelativeLayout>

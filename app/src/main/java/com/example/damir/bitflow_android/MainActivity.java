@@ -1,11 +1,15 @@
 package com.example.damir.bitflow_android;
 
 import android.app.Activity;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.audiofx.Visualizer;
 import android.os.Handler;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,19 +18,20 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends Activity {
 
-    private Button
-            play,
-            pause,
-            backward,
-            forward;
+    private static final float VISUALIZER_HEIGHT_DIP = 200f;
+
+    private RelativeLayout mRelativeLayout;
 
     private MediaPlayer mPlayer;
+    private Visualizer mVisualizer;
+
     private Handler myHandler = new Handler();
+
+    private Button play, pause, backward, forward;
+    private TextView currentTrackTime, totalTrackTime, trackTitle;
     private SeekBar trackProgress;
-    private TextView
-            currentTrackTime,
-            totalTrackTime,
-            trackTitle;
+
+    private VisualizerView mVisualizerView;
 
     private double startTime = 0;
     private double finalTime = 0;
@@ -40,17 +45,33 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+        // Main layout
+        mRelativeLayout = (RelativeLayout) findViewById(R.id.mainLayout);
+
+        // Buttons
         play=(Button)findViewById(R.id.play);
         forward = (Button) findViewById(R.id.forward);
         pause = (Button) findViewById(R.id.pause);
         backward=(Button)findViewById(R.id.backward);
 
+        // Helpers
         currentTrackTime=(TextView)findViewById(R.id.currentTrackTime);
         totalTrackTime=(TextView)findViewById(R.id.totalTrackTime);
         trackTitle=(TextView)findViewById(R.id.trackTitle);
         trackTitle.setText("test.mp3");
 
-        mPlayer = MediaPlayer.create(this, R.raw.test);
+        // Player
+        mPlayer = MediaPlayer.create(this, R.raw.track);
+
+        setupVisualizerFxAndUI();
+
+        // Make sure the visualizer is enabled only when you actually want to receive data, and
+        // when it makes sense to receive data.
+        mVisualizer.setEnabled(true);
+
+        // Player helpers
         trackProgress=(SeekBar)findViewById(R.id.trackProgress);
         trackProgress.setClickable(false);
         pause.setEnabled(false);
@@ -164,4 +185,44 @@ public class MainActivity extends Activity {
             myHandler.postDelayed(this, 100);
         }
     };
+
+    private void setupVisualizerFxAndUI() {
+
+        // Create a VisualizerView (defined below), which will render the simplified audio
+        // wave form to a Canvas.
+
+        mVisualizerView = new VisualizerView(this);
+
+        mVisualizerView.setLayoutParams(new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                (int)(VISUALIZER_HEIGHT_DIP * getResources().getDisplayMetrics().density)));
+
+        mRelativeLayout.addView(mVisualizerView);
+
+
+
+        // Create the Visualizer object and attach it to our media player.
+        mVisualizer = new Visualizer(mPlayer.getAudioSessionId());
+        mVisualizer.setCaptureSize(Visualizer.getCaptureSizeRange()[1]);
+        mVisualizer.setDataCaptureListener(new Visualizer.OnDataCaptureListener() {
+            public void onWaveFormDataCapture(Visualizer visualizer, byte[] bytes,
+                                              int samplingRate) {
+                mVisualizerView.updateVisualizer(bytes);
+            }
+
+            public void onFftDataCapture(Visualizer visualizer, byte[] bytes, int samplingRate) {}
+        }, Visualizer.getMaxCaptureRate() / 2, true, false);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        if (isFinishing() && mPlayer != null) {
+            mVisualizer.release();
+//            mEqualizer.release();
+            mPlayer.release();
+            mPlayer = null;
+        }
+    }
 }
