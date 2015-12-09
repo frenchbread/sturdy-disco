@@ -173,12 +173,11 @@ public class MainActivity extends Activity {
 
             startTime = mPlayer.getCurrentPosition();
 
-            currentTrackTime.setText(String.format(
-                    "%d:%d",
-                    TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-                    TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) startTime)))
-            );
+            long mins = TimeUnit.MILLISECONDS.toMinutes((long) startTime);
+            long secs = TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
+                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) startTime));
+
+            currentTrackTime.setText(String.format("%02d:%02d", mins, secs));
 
             trackProgress.setProgress((int)startTime);
 
