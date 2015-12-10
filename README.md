@@ -1,6 +1,7 @@
 # sturdy-disco
 Music visualizer for Android.
 
+[Demo](https://youtu.be/Bh1M4_7gwpk)
 
 ### Screenshot
 
