@@ -20,8 +20,6 @@ import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends Activity {
 
-    protected PowerManager.WakeLock mWakeLock;
-
     private static final float VISUALIZER_HEIGHT_DIP = 180f;
 
     private RelativeLayout mRelativeLayout;
@@ -73,7 +71,7 @@ public class MainActivity extends Activity {
         trackTitle.setText("track.mp3");
 
         // Player
-        mPlayer = MediaPlayer.create(this, R.raw.track);
+        mPlayer = MediaPlayer.create(this, R.raw.test);
 
         setupVisualizerFxAndUI();
 
@@ -100,8 +98,6 @@ public class MainActivity extends Activity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
-
 
                 mPlayer.start();
                 isPaused = false;
